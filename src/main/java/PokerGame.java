@@ -39,27 +39,23 @@ public class PokerGame {
         return cardList;
     }
 
-    public Poker changeRangeOfSequence(Poker poker) {
+    public boolean isSequence(List<Card> cards) {
         boolean isSequence = true;
-        List<Card> cards = poker.getCardList();
         for (int i = 0; i < cards.size() - 1; i++) {
             if (cards.get(i).getNumber() != cards.get(i + 1).getNumber() - 1)
                 isSequence = false;
         }
-        if (isSequence == true&&poker.getRange()<4) poker.setRange(4);
-        return poker;
+        return isSequence;
     }
 
-    public Poker changeRangeOfFlush(Poker poker) {
+    public boolean isFlush(List<Card> cards) {
         boolean isFlush = true;
-        List<Card> cards = poker.getCardList();
         for (int i = 0; i < cards.size() - 1; i++) {
             if (!cards.get(i).getType().equals(cards.get(i + 1).getType())) {
                 isFlush = false;
             }
         }
-        if (isFlush == true&&poker.getRange()<5) poker.setRange(5);
-        return poker;
+        return isFlush;
     }
 
     public Poker getRangeOfCardList(List<Card> cards) {
@@ -82,7 +78,7 @@ public class PokerGame {
                     containsThreeEqual = true;
                     break;
                 case 4:
-                    range=7;
+                    range = 7;
                 default:
                     break;
             }
@@ -95,9 +91,14 @@ public class PokerGame {
             }
         });
         Poker poker = new Poker(cards, range, list);
-        poker = this.changeRangeOfSequence(poker);
-        poker = this.changeRangeOfFlush(poker);
+        if (this.isSequence(cards) && poker.getRange() < 4) {
+            poker.setRange(4);
+        }
+        if (this.isFlush(cards) && poker.getRange() < 5) {
+            poker.setRange(5);
+        }
         if (containsTwoEqual && containsThreeEqual) poker.setRange(6);
+        if(this.isFlush(cards)&&this.isSequence(cards))poker.setRange(8);
         return poker;
     }
 
