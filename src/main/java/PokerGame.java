@@ -42,7 +42,6 @@ public class PokerGame {
         boolean isSequence=true;
         List<Card> cards = poker.getCardList();
         for (int i=0;i<cards.size()-1;i++){
-            System.out.println("i:"+cards.get(i).getNumber()+" i+1:"+cards.get(i+1).getNumber());
             if (cards.get(i).getNumber()!=cards.get(i+1).getNumber()-1)
                 isSequence= false;
         }
