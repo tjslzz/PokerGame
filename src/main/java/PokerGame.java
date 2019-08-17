@@ -81,6 +81,8 @@ public class PokerGame {
                     range = 3;
                     containsThreeEqual = true;
                     break;
+                case 4:
+                    range=7;
                 default:
                     break;
             }
