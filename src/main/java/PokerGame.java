@@ -39,14 +39,17 @@ public class PokerGame {
     public Poker getRangeOfCardList(List<Card> cards){
 
         Map<Integer,Integer> numberOfCard=new TreeMap<Integer, Integer>();
-        int countOfPair=0;
+        int range=0;
         for (int i = 0; i < cards.size(); i++) {
             Integer integer = numberOfCard.get(cards.get(i).getNumber());
             numberOfCard.put(cards.get(i).getNumber(), integer == null?1:integer+1);
         }
         for (Integer value : numberOfCard.values()) {
-            if (value==2)
-                countOfPair++;
+            switch (value){
+                case 2:range++;break;
+                case 3:range=3;break;
+                default:break;
+            }
         }
         List<Map.Entry<Integer,Integer>> list = new ArrayList<Map.Entry<Integer,Integer>>(numberOfCard.entrySet());
         Collections.sort(list,new Comparator<Map.Entry<Integer,Integer>>() {
@@ -54,7 +57,7 @@ public class PokerGame {
                 return o2.getValue().compareTo(o1.getValue());
             }
         });
-        Poker poker=new Poker(cards,countOfPair,list);
+        Poker poker=new Poker(cards,range,list);
         return poker;
     }
 
