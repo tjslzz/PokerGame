@@ -40,17 +40,24 @@ public class PokerGame {
 
         Map<Integer,Integer> numberOfCard=new TreeMap<Integer, Integer>();
         int range=0;
+        boolean isSequence=true;
         for (int i = 0; i < cards.size(); i++) {
             Integer integer = numberOfCard.get(cards.get(i).getNumber());
             numberOfCard.put(cards.get(i).getNumber(), integer == null?1:integer+1);
         }
-        for (Integer value : numberOfCard.values()) {
-            switch (value){
-                case 2:range++;break;
-                case 3:range=3;break;
-                default:break;
+        for (Map.Entry<Integer, Integer> entry : numberOfCard.entrySet()) {
+            switch (entry.getValue()) {
+                case 2:
+                    range++;
+                    break;
+                case 3:
+                    range = 3;
+                    break;
+                default:
+                    break;
             }
         }
+
         List<Map.Entry<Integer,Integer>> list = new ArrayList<Map.Entry<Integer,Integer>>(numberOfCard.entrySet());
         Collections.sort(list,new Comparator<Map.Entry<Integer,Integer>>() {
             public int compare(Map.Entry<Integer,Integer> o1, Map.Entry<Integer,Integer> o2) {
