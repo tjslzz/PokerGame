@@ -35,5 +35,5 @@ public class PokerGameTest {
         String result = pokerGame.getWinner(player1, player2);
         assertEquals("Winner:player2",result);
     }
-    
+
 }
