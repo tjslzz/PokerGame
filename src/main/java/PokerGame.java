@@ -37,9 +37,29 @@ public class PokerGame {
         });
         return cardList;
     }
+    public Poker getRangeOfCardList(List<Card> cards){
+        Map<Integer,Integer> NumberOfCard=new HashMap<>();
+        int countOfPair=0;
+        for (int i = 0; i < cards.size(); i++) {
+            Integer integer = NumberOfCard.get(cards.get(i).getNumber());
+            NumberOfCard.put(cards.get(i).getNumber(), integer == null?1:integer+1);
+        }
+        for (Integer value : NumberOfCard.values()) {
+            if (value==2)
+                countOfPair++;
+        }
+
+            Poker poker=new Poker(cards,countOfPair);
+        return poker;
+    }
+
     public String getWinner(String player1, String player2) {
         List<Card> cardlist1 = this.changeStringtoCard(player1);
         List<Card> cardlist2 = this.changeStringtoCard(player2);
+        Poker poker1 = this.getRangeOfCardList(cardlist1);
+        Poker poker2 = this.getRangeOfCardList(cardlist2);
+        String result="draw";
+        if(poker1.getRange()==poker2.getRange()){
         for (int i=4;i>=0;i--) {
             int card1Number=cardlist1.get(i).getNumber();
             int card2Number=cardlist2.get(i).getNumber();
@@ -51,6 +71,11 @@ public class PokerGame {
                 continue;
             }
         }
-        return "draw";
+        }else if(poker1.getRange()>poker2.getRange()){
+            result="Winner:player1";
+        }else{
+            result="Winner:player2";
+        }
+        return result;
     }
 }

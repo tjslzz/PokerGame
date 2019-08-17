@@ -25,6 +25,6 @@ public class PokerGameTest {
         String player1 = "1H 1H 5S 6S QD";
         String player2 = "1H 3H 5S 6S KD";
         String result = pokerGame.getWinner(player1, player2);
-        assertEquals("player1",result);
+        assertEquals("Winner:player1",result);
     }
 }
