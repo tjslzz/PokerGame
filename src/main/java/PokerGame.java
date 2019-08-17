@@ -65,6 +65,8 @@ public class PokerGame {
     public Poker getRangeOfCardList(List<Card> cards) {
         Map<Integer, Integer> numberOfCard = new TreeMap<Integer, Integer>();
         int range = 0;
+        boolean containsTwoEqual=false;
+        boolean containsThreeEqual=false;
         for (int i = 0; i < cards.size(); i++) {
             Integer integer = numberOfCard.get(cards.get(i).getNumber());
             numberOfCard.put(cards.get(i).getNumber(), integer == null ? 1 : integer + 1);
@@ -73,9 +75,11 @@ public class PokerGame {
             switch (entry.getValue()) {
                 case 2:
                     range++;
+                    containsTwoEqual=true;
                     break;
                 case 3:
                     range = 3;
+                    containsThreeEqual=true;
                     break;
                 default:
                     break;
@@ -91,6 +95,7 @@ public class PokerGame {
         Poker poker = new Poker(cards, range, list);
         poker = this.changeRangeOfSequence(poker);
         poker = this.changeRangeOfFlush(poker);
+        if(containsThreeEqual&&containsThreeEqual)poker.setRange(6);
         return poker;
     }
 
