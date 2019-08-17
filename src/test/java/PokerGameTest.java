@@ -92,12 +92,20 @@ public class PokerGameTest {
         assertEquals("Winner:player1",result);
     }
     @Test
-    public void should_return_player1_when_1H_2H_3S_4S_5D_VS_2H_3H_4S_5S_6D(){
+    public void should_return_player2_when_1H_2H_3S_4S_5D_VS_2H_3H_4S_5S_6D(){
         PokerGame pokerGame=new PokerGame();
         String player1 = "1H 2H 3S 4S 5D";
         String player2 = "2H 3H 4S 5S 6D";
         String result = pokerGame.getWinner(player1, player2);
         assertEquals("Winner:player2",result);
+    }
+    @Test
+    public void should_return_player1_when_1H_2H_3H_4H_5H_VS_2H_3H_4S_5S_6D(){
+        PokerGame pokerGame=new PokerGame();
+        String player1 = "1H 2H 3H 4H 5H";
+        String player2 = "2H 3H 4S 5S 6D";
+        String result = pokerGame.getWinner(player1, player2);
+        assertEquals("Winner:player1",result);
     }
 
 }
