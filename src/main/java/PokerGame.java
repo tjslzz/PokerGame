@@ -1,3 +1,5 @@
+import javafx.scene.control.TextFormatter;
+
 import java.util.*;
 
 public class PokerGame {
@@ -36,10 +38,20 @@ public class PokerGame {
         });
         return cardList;
     }
+    public Poker changeRangeOfSequence(Poker poker){
+        boolean isSequence=true;
+        List<Card> cards = poker.getCardList();
+        for (int i=0;i<cards.size()-1;i++){
+            System.out.println("i:"+cards.get(i).getNumber()+" i+1:"+cards.get(i+1).getNumber());
+            if (cards.get(i).getNumber()!=cards.get(i+1).getNumber()-1)
+                isSequence= false;
+        }
+        if (isSequence==true)poker.setRange(4);
+        return poker;
+    }
     public Poker getRangeOfCardList(List<Card> cards){
         Map<Integer,Integer> numberOfCard=new TreeMap<Integer, Integer>();
         int range=0;
-        boolean isSequence=true;
         for (int i = 0; i < cards.size(); i++) {
             Integer integer = numberOfCard.get(cards.get(i).getNumber());
             numberOfCard.put(cards.get(i).getNumber(), integer == null?1:integer+1);
@@ -64,6 +76,7 @@ public class PokerGame {
             }
         });
         Poker poker=new Poker(cards,range,list);
+        poker=this.changeRangeOfSequence(poker);
         return poker;
     }
 

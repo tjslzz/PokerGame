@@ -17,6 +17,14 @@ public class Poker {
         this.numberOfCard = numberOfCard;
     }
 
+    public List<Card> getCardList() {
+        return cardList;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
+
     public int getRange() {
         return range;
     }
