@@ -36,9 +36,9 @@ public class PokerGameTest {
         assertEquals("Winner:player2",result);
     }
     @Test
-    public void should_return_player1_when_1H_1H_1S_6S_KD_VS_3H_3H_5S_6S_QD(){
+    public void should_return_player1_when_1H_1H_5S_5S_QD_VS_3H_3H_5S_6S_QD(){
         PokerGame pokerGame=new PokerGame();
-        String player1 = "1H 1H 1S 6S KD";
+        String player1 = "1H 1H 5S 5S QD";
         String player2 = "3H 3H 5S 6S QD";
         String result = pokerGame.getWinner(player1, player2);
         assertEquals("Winner:player1",result);
