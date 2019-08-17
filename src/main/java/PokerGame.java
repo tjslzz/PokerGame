@@ -23,7 +23,6 @@ public class PokerGame {
             cardList.add(new Card(actualNumber,type));
         }
         Collections.sort(cardList, new Comparator<Card>() {
-
             @Override
             public int compare(Card c1, Card c2) {
                 if (c1.getNumber() > c2.getNumber()) {
@@ -38,18 +37,24 @@ public class PokerGame {
         return cardList;
     }
     public Poker getRangeOfCardList(List<Card> cards){
-        Map<Integer,Integer> NumberOfCard=new HashMap<>();
+
+        Map<Integer,Integer> numberOfCard=new TreeMap<Integer, Integer>();
         int countOfPair=0;
         for (int i = 0; i < cards.size(); i++) {
-            Integer integer = NumberOfCard.get(cards.get(i).getNumber());
-            NumberOfCard.put(cards.get(i).getNumber(), integer == null?1:integer+1);
+            Integer integer = numberOfCard.get(cards.get(i).getNumber());
+            numberOfCard.put(cards.get(i).getNumber(), integer == null?1:integer+1);
         }
-        for (Integer value : NumberOfCard.values()) {
+        for (Integer value : numberOfCard.values()) {
             if (value==2)
                 countOfPair++;
         }
-
-            Poker poker=new Poker(cards,countOfPair);
+        List<Map.Entry<Integer,Integer>> list = new ArrayList<Map.Entry<Integer,Integer>>(numberOfCard.entrySet());
+        Collections.sort(list,new Comparator<Map.Entry<Integer,Integer>>() {
+            public int compare(Map.Entry<Integer,Integer> o1, Map.Entry<Integer,Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        });
+        Poker poker=new Poker(cards,countOfPair,list);
         return poker;
     }
 
@@ -60,18 +65,18 @@ public class PokerGame {
         Poker poker2 = this.getRangeOfCardList(cardlist2);
         String result="draw";
         if(poker1.getRange()==poker2.getRange()){
-        for (int i=4;i>=0;i--) {
-            int card1Number=cardlist1.get(i).getNumber();
-            int card2Number=cardlist2.get(i).getNumber();
-            if (card1Number>card2Number){
-                return "Winner:player1";
-            } else if (card1Number<card2Number){
-                return "Winner:player2";
-            } else {
-                continue;
+            List<Map.Entry<Integer,Integer>> numberOfCard1=poker1.getNumberOfCard();
+            List<Map.Entry<Integer,Integer>> numberOfCard2=poker2.getNumberOfCard();
+            for (int i=0;i<numberOfCard1.size();i++){
+                if(numberOfCard1.get(i).getKey()>numberOfCard2.get(i).getKey()){
+                    return "Winner:player1";
+                }else if (numberOfCard1.get(i).getKey()<numberOfCard2.get(i).getKey()){
+                    return "Winner:player2";
+                }
             }
+
         }
-        }else if(poker1.getRange()>poker2.getRange()){
+        else if(poker1.getRange()>poker2.getRange()){
             result="Winner:player1";
         }else{
             result="Winner:player2";
