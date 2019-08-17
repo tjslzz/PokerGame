@@ -46,7 +46,7 @@ public class PokerGame {
             if (cards.get(i).getNumber() != cards.get(i + 1).getNumber() - 1)
                 isSequence = false;
         }
-        if (isSequence == true) poker.setRange(4);
+        if (isSequence == true&&poker.getRange()<4) poker.setRange(4);
         return poker;
     }
 
@@ -58,7 +58,7 @@ public class PokerGame {
                 isFlush = false;
             }
         }
-        if (isFlush == true) poker.setRange(5);
+        if (isFlush == true&&poker.getRange()<5) poker.setRange(5);
         return poker;
     }
 
