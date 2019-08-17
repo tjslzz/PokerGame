@@ -131,5 +131,13 @@ public class PokerGameTest {
         String result = pokerGame.getWinner(player1, player2);
         assertEquals("Winner:player2",result);
     }
+    @Test
+    public void should_return_player2_when_3H_4C_3H_3H_3H_VS_6C_6C_6C_1C_1C(){
+        PokerGame pokerGame=new PokerGame();
+        String player1 = "3H 4C 3H 3H 3H";
+        String player2 = "6C 6C 6C 1C 1C";
+        String result = pokerGame.getWinner(player1, player2);
+        assertEquals("Winner:player1",result);
+    }
 
 }
