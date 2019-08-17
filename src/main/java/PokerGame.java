@@ -57,7 +57,6 @@ public class PokerGame {
                     break;
             }
         }
-
         List<Map.Entry<Integer,Integer>> list = new ArrayList<Map.Entry<Integer,Integer>>(numberOfCard.entrySet());
         Collections.sort(list,new Comparator<Map.Entry<Integer,Integer>>() {
             public int compare(Map.Entry<Integer,Integer> o1, Map.Entry<Integer,Integer> o2) {
@@ -78,10 +77,12 @@ public class PokerGame {
             List<Map.Entry<Integer,Integer>> numberOfCard1=poker1.getNumberOfCard();
             List<Map.Entry<Integer,Integer>> numberOfCard2=poker2.getNumberOfCard();
             for (int i=0;i<numberOfCard1.size();i++){
+                System.out.println("key:"+numberOfCard1.get(i).getKey()+" vale:"+numberOfCard1.get(i).getKey());
+                System.out.println("key:"+numberOfCard2.get(i).getKey()+" vale:"+numberOfCard2.get(i).getKey());
                 if(numberOfCard1.get(i).getKey()>numberOfCard2.get(i).getKey()){
-                    return "Winner:player1";
+                    result="Winner:player1";
                 }else if (numberOfCard1.get(i).getKey()<numberOfCard2.get(i).getKey()){
-                    return "Winner:player2";
+                    result="Winner:player2";
                 }
             }
 
