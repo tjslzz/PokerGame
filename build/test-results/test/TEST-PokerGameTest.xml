@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="PokerGameTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2019-08-17T14:32:26" hostname="DESKTOP-SFT9UG0" time="0.014">
+<testsuite name="PokerGameTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-08-17T14:34:19" hostname="DESKTOP-SFT9UG0" time="0.008">
   <properties/>
-  <testcase name="should_return_player2_when_1H_1H_5S_5S_QD_VS_3H_3H_3S_6S_QD" classname="PokerGameTest" time="0.007"/>
-  <testcase name="should_return_player1_when_1H_1H_5S_5S_QD_VS_3H_3H_5S_6S_QD" classname="PokerGameTest" time="0.001"/>
-  <testcase name="should_return_player1_when_1H_1H_5S_6S_QD_VS_1H_3H_5S_6S_KD" classname="PokerGameTest" time="0.001"/>
-  <testcase name="should_return_player2_when_1H_3H_5S_6S_QD_VS_1H_3H_5S_JS_QD" classname="PokerGameTest" time="0.002"/>
-  <testcase name="should_return_player2_when_1H_1H_5S_6S_KD_VS_3H_3H_5S_6S_QD" classname="PokerGameTest" time="0.0"/>
-  <testcase name="should_return_draw_when_1H_3H_5S_6S_QD_VS_1H_3H_5S_6S_QD" classname="PokerGameTest" time="0.0"/>
+  <testcase name="should_return_player1_when_4H_4H_4S_5S_QD_VS_3H_3H_3S_6S_QD" classname="PokerGameTest" time="0.008"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
