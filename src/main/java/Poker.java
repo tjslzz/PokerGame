@@ -3,7 +3,7 @@ import java.util.Map;
 
 class Poker {
     private int range;
-    List<Map.Entry<Integer,Integer>>numberOfCard;
+    private List<Map.Entry<Integer, Integer>> numberOfCard;
 
     List<Map.Entry<Integer, Integer>> getNumberOfCard() {
         return numberOfCard;
