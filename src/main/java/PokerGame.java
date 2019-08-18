@@ -1,9 +1,8 @@
-import javafx.scene.control.TextFormatter;
 
 import java.util.*;
 
 public class PokerGame {
-    public List<Card> changeStringtoCard(String player1) {
+    private List<Card> changeStringtoCard(String player1) {
         Map<String, Integer> CharWithNumber = new HashMap<>();
         CharWithNumber.put("T", 10);
         CharWithNumber.put("J", 11);
@@ -39,7 +38,7 @@ public class PokerGame {
         return cardList;
     }
 
-    public boolean isSequence(List<Card> cards) {
+    private boolean isSequence(List<Card> cards) {
         boolean isSequence = true;
         for (int i = 0; i < cards.size() - 1; i++) {
             if (cards.get(i).getNumber() != cards.get(i + 1).getNumber() - 1)
@@ -48,7 +47,7 @@ public class PokerGame {
         return isSequence;
     }
 
-    public boolean isFlush(List<Card> cards) {
+    private boolean isFlush(List<Card> cards) {
         boolean isFlush = true;
         for (int i = 0; i < cards.size() - 1; i++) {
             if (!cards.get(i).getType().equals(cards.get(i + 1).getType())) {
@@ -58,7 +57,7 @@ public class PokerGame {
         return isFlush;
     }
 
-    public Poker getRangeOfCardList(List<Card> cards) {
+    private Poker getRangeOfCardList(List<Card> cards) {
         Map<Integer, Integer> numberOfCard = new TreeMap<Integer, Integer>();
         int range = 0;
         boolean containsTwoEqual = false;
@@ -90,7 +89,7 @@ public class PokerGame {
                 return o2.getValue().compareTo(o1.getValue());
             }
         });
-        Poker poker = new Poker(cards, range, list);
+        Poker poker = new Poker(range, list);
         if (this.isSequence(cards) && poker.getRange() < 4) {
             poker.setRange(4);
         }
@@ -102,7 +101,7 @@ public class PokerGame {
         return poker;
     }
 
-    public String getWinner(String player1, String player2) {
+    String getWinner(String player1, String player2) {
         List<Card> cardlist1 = this.changeStringtoCard(player1);
         List<Card> cardlist2 = this.changeStringtoCard(player2);
         Poker poker1 = this.getRangeOfCardList(cardlist1);
