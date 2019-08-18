@@ -2,14 +2,14 @@
 import java.util.*;
 
 public class PokerGame {
-    static final int T_VALUE = 10;
-    static final int J_VALUE = 11;
-    static final int Q_VALUE = 12;
-    static final int K_VALUE = 13;
-    static final int A_VALUE = 14;
-    static final String WINNER_ONE = "Winner:player1";
-    static final String WINNER_TWO = "Winner:player2";
-    static final String DRAW = "draw";
+    private static final int T_VALUE = 10;
+    private static final int J_VALUE = 11;
+    private static final int Q_VALUE = 12;
+    private static final int K_VALUE = 13;
+    private static final int A_VALUE = 14;
+    private static final String WINNER_ONE = "Winner:player1";
+    private static final String WINNER_TWO = "Winner:player2";
+    private static final String DRAW = "draw";
 
     private List<Card> changeStringtoCard(String player1) {
         Map<String, Integer> CharWithNumber = new HashMap<>();
@@ -31,18 +31,7 @@ public class PokerGame {
             }
             cardList.add(new Card(actualNumber, type));
         }
-        Collections.sort(cardList, new Comparator<Card>() {
-            @Override
-            public int compare(Card c1, Card c2) {
-                if (c1.getNumber() > c2.getNumber()) {
-                    return 1;
-                }
-                if (c1.getNumber() == c2.getNumber()) {
-                    return 0;
-                }
-                return -1;
-            }
-        });
+        cardList.sort(Card::compareTo);
         return cardList;
     }
 
@@ -70,9 +59,9 @@ public class PokerGame {
         int range = 0;
         boolean containsTwoEqual = false;
         boolean containsThreeEqual = false;
-        for (int i = 0; i < cards.size(); i++) {
-            Integer integer = numberOfCard.get(cards.get(i).getNumber());
-            numberOfCard.put(cards.get(i).getNumber(), integer == null ? 1 : integer + 1);
+        for (Card card : cards) {
+            Integer integer = numberOfCard.get(card.getNumber());
+            numberOfCard.put(card.getNumber(), integer == null ? 1 : integer + 1);
         }
         for (Map.Entry<Integer, Integer> entry : numberOfCard.entrySet()) {
             switch (entry.getValue()) {
@@ -91,12 +80,8 @@ public class PokerGame {
             }
         }
         numberOfCard = ((TreeMap) numberOfCard).descendingMap();
-        List<Map.Entry<Integer, Integer>> list = new ArrayList<Map.Entry<Integer, Integer>>(numberOfCard.entrySet());
-        Collections.sort(list, new Comparator<Map.Entry<Integer, Integer>>() {
-            public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
-                return o2.getValue().compareTo(o1.getValue());
-            }
-        });
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(numberOfCard.entrySet());
+        list.sort((pre, cur) -> cur.getValue().compareTo(pre.getValue()));
         Poker poker = new Poker(range, list);
         if (this.isSequence(cards) && poker.getRange() < 4) {
             poker.setRange(4);

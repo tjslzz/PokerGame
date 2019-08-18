@@ -15,4 +15,9 @@ public class Card {
     String getType() {
         return type;
     }
+
+    int compareTo(Card card) {
+        if (number == card.getNumber()) return 0;
+        return number > card.getNumber() ? 1 : -1;
+    }
 }
