@@ -55,7 +55,7 @@ public class PokerGame {
     }
 
     private Poker getRangeOfCardList(List<Card> cards) {
-        Map<Integer, Integer> numberOfCard = new TreeMap<>();
+        NavigableMap<Integer, Integer> numberOfCard = new TreeMap<>();
         int range = 0;
         boolean containsTwoEqual = false;
         boolean containsThreeEqual = false;
@@ -79,7 +79,7 @@ public class PokerGame {
                     break;
             }
         }
-        numberOfCard = ((TreeMap) numberOfCard).descendingMap();
+        numberOfCard = numberOfCard.descendingMap();
         List<Map.Entry<Integer, Integer>> list = new ArrayList<>(numberOfCard.entrySet());
         list.sort((pre, cur) -> cur.getValue().compareTo(pre.getValue()));
         Poker poker = new Poker(range, list);
