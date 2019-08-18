@@ -11,28 +11,29 @@ public class PokerGame {
     private static final String WINNER_TWO = "Winner:player2";
     private static final String DRAW = "draw";
 
-    private List<Card> changeStringtoCard(String player1) {
+    private List<Card> changeStringtoCard(String player) {
+        List<Card> cardList = new ArrayList<>();
+        String[] cards = player.split(" ");
+        Arrays.asList(cards).forEach(card -> cardList.add(createNewCard(card)));
+        cardList.sort(Card::compareTo);
+        return cardList;
+    }
+
+    private Card createNewCard(String card) {
+        Map<String, Integer> CharWithNumber = initCharWithNumber();
+        String type = card.substring(1, 2);
+        String number = card.substring(0, 1);
+        return CharWithNumber.get(number) != null ? new Card(CharWithNumber.get(number), type) : new Card(Integer.parseInt(number), type);
+    }
+
+    private Map<String, Integer> initCharWithNumber() {
         Map<String, Integer> CharWithNumber = new HashMap<>();
         CharWithNumber.put("T", T_VALUE);
         CharWithNumber.put("J", J_VALUE);
         CharWithNumber.put("Q", Q_VALUE);
         CharWithNumber.put("K", K_VALUE);
         CharWithNumber.put("A", A_VALUE);
-        List<Card> cardList = new ArrayList<>();
-        String[] cards = player1.split(" ");
-        for (String card : cards) {
-            int actualNumber;
-            String type = card.substring(1, 2);
-            String number = card.substring(0, 1);
-            if (CharWithNumber.get(number) != null) {
-                actualNumber = CharWithNumber.get(number);
-            } else {
-                actualNumber = Integer.parseInt(number);
-            }
-            cardList.add(new Card(actualNumber, type));
-        }
-        cardList.sort(Card::compareTo);
-        return cardList;
+        return CharWithNumber;
     }
 
     private boolean isSequence(List<Card> cards) {
