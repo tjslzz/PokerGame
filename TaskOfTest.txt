@@ -1,0 +1,97 @@
+High Card VS High Card:
+player1£º1H 3H 5S 6S QD
+player2£º1H 3H 5S JS QD
+winner£ºplayer2
+
+player1£º1H 3H 5S 6S QD
+player2£º1H 3H 5S 6S QD
+winner£ºdraw
+
+High Card VS Pair:
+player1£º1H 1H 5S 6S QD
+player2£º1H 3H 5S 6S KD
+winner£ºplayer1
+
+Pair VS Pair:
+player1£º1H 1H 5S 6S QD
+player2£º3H 3H 5S 6S QD
+winner£ºplayer2
+
+Two Pair VS Pair:
+player1£º1H 1H 5S 5S QD
+player2£º3H 3H 5S 6S QD
+winner£ºplayer1
+
+Two Pair VS Two Pair:
+player1£º1H 1H 6S 6S QD
+player2£º3H 3H 5S 5S QD
+winner£ºplayer1
+
+Three of a Kind VS Two Pair:
+player1£º1H 1H 5S 5S QD
+player2£º3H 3H 3S 6S QD
+winner£ºplayer2
+
+Three of a Kind VS Three of a Kind:
+player1£º4H 4H 4S 5S QD
+player2£º3H 3H 3S 6S QD
+winner£ºplayer1
+
+player1£º4H 4H 4S 5S QD
+player2£º4H 4H 4S 5S QD
+winner£ºdraw
+
+player1£º3H 3H 3S 5S KD
+player2£º4H 4H 4S 5S QD
+winner£ºplayer2
+
+Straight VS Three of a Kind:
+player1£º1H 2H 3S 4S 5D
+player2£º4H 4H 4S 5S QD
+winner£ºplayer1
+
+Straight VS Straight:
+player1£º1H 2H 4S 3S 5D
+player2£º2H 3H 4S 5S 6D
+winner£ºplayer2
+
+Flush VS Straight:
+player1£º1H 2H 2H 4H 5H
+player2£º2H 3H 4S 5S 6D
+winner£ºplayer1
+
+Flush VS Flush:
+player1£º1H 2H 2H 4H 7H
+player2£º3C 3C 4C 5C 6C
+winner£ºplayer2
+
+Full House VS Flush:
+player1£º5H 5C 5H 2H 2H
+player2£º1C 6C 6C 1C 3C
+winner£ºplayer1
+
+Full House VS Full House:
+player1£º5H 5C 5H 2H 2H
+player2£º6C 6C 6C 1C 1C
+winner£ºplayer2
+
+Four of a kind VS Full House:
+player1£º3H 4C 3H 3H 3H
+player2£º6C 6C 6C 1C 1C
+winner£ºplayer1
+
+Four of a kind VS Four of a kind
+player1£º3H 4C 3H 3H 3H
+player2£º6C 6C 6C 6C 1C
+winner£ºplayer2
+
+StraightFlush VS Four of a kind
+player1£º3H 4H 5H 6H 7H
+player2£ºAC AC AC AC 1C
+winner£ºplayer1
+
+StraightFlush VS StraightFlush
+player1£º3H 4H 5H 6H 7H
+player2£º4C 5C 6C 7C 8C
+winner£ºplayer2
+
