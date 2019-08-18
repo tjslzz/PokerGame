@@ -37,33 +37,24 @@ public class PokerGame {
     }
 
     private boolean isSequence(List<Card> cards) {
-        boolean isSequence = true;
-        for (int i = 0; i < cards.size() - 1; i++) {
+        for (int i = 0; i < cards.size() - 1; i++)
             if (cards.get(i).getNumber() != cards.get(i + 1).getNumber() - 1)
-                isSequence = false;
-        }
-        return isSequence;
+                return false;
+        return true;
     }
 
     private boolean isFlush(List<Card> cards) {
-        boolean isFlush = true;
-        for (int i = 0; i < cards.size() - 1; i++) {
-            if (!cards.get(i).getType().equals(cards.get(i + 1).getType())) {
-                isFlush = false;
-            }
-        }
-        return isFlush;
+        for (int i = 0; i < cards.size() - 1; i++)
+            if (!cards.get(i).getType().equals(cards.get(i + 1).getType()))
+                return false;
+        return true;
     }
 
     private Poker getRangeOfCardList(List<Card> cards) {
-        NavigableMap<Integer, Integer> numberOfCard = new TreeMap<>();
+        NavigableMap<Integer, Integer> numberOfCard = initNumberOfCard(cards);
         int range = 0;
         boolean containsTwoEqual = false;
         boolean containsThreeEqual = false;
-        for (Card card : cards) {
-            Integer integer = numberOfCard.get(card.getNumber());
-            numberOfCard.put(card.getNumber(), integer == null ? 1 : integer + 1);
-        }
         for (Map.Entry<Integer, Integer> entry : numberOfCard.entrySet()) {
             switch (entry.getValue()) {
                 case 2:
@@ -84,15 +75,24 @@ public class PokerGame {
         List<Map.Entry<Integer, Integer>> list = new ArrayList<>(numberOfCard.entrySet());
         list.sort((pre, cur) -> cur.getValue().compareTo(pre.getValue()));
         Poker poker = new Poker(range, list);
-        if (this.isSequence(cards) && poker.getRange() < 4) {
-            poker.setRange(4);
-        }
-        if (this.isFlush(cards) && poker.getRange() < 5) {
-            poker.setRange(5);
-        }
+        setPokerRange(cards, containsTwoEqual, containsThreeEqual, poker);
+        return poker;
+    }
+
+    private void setPokerRange(List<Card> cards, boolean containsTwoEqual, boolean containsThreeEqual, Poker poker) {
+        if (this.isSequence(cards) && poker.getRange() < 4) poker.setRange(4);
+        if (this.isFlush(cards) && poker.getRange() < 5) poker.setRange(5);
         if (containsTwoEqual && containsThreeEqual) poker.setRange(6);
         if (this.isFlush(cards) && this.isSequence(cards)) poker.setRange(8);
-        return poker;
+    }
+
+    private NavigableMap<Integer, Integer> initNumberOfCard(List<Card> cards) {
+        NavigableMap<Integer, Integer> numberOfCard = new TreeMap<>();
+        for (Card card : cards) {
+            Integer integer = numberOfCard.get(card.getNumber());
+            numberOfCard.put(card.getNumber(), integer == null ? 1 : integer + 1);
+        }
+        return numberOfCard;
     }
 
     String getWinner(String player1, String player2) {
@@ -100,7 +100,6 @@ public class PokerGame {
         List<Card> cardlist2 = this.changeStringtoCard(player2);
         Poker poker1 = this.getRangeOfCardList(cardlist1);
         Poker poker2 = this.getRangeOfCardList(cardlist2);
-        String result = DRAW;
         if (poker1.getRange() == poker2.getRange()) {
             List<Map.Entry<Integer, Integer>> numberOfCard1 = poker1.getNumberOfCard();
             List<Map.Entry<Integer, Integer>> numberOfCard2 = poker2.getNumberOfCard();
@@ -111,12 +110,8 @@ public class PokerGame {
                     return WINNER_TWO;
                 }
             }
-
-        } else if (poker1.getRange() > poker2.getRange()) {
-            result = WINNER_ONE;
-        } else {
-            result = WINNER_TWO;
+            return DRAW;
         }
-        return result;
+        return poker1.getRange() > poker2.getRange()?WINNER_ONE:WINNER_TWO;
     }
 }
